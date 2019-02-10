@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--Summons the module to give the <html>-->
+<html lang="en" ng-app="todoApp">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TODO LIST</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <main>
+    <section ng-controller="TodoController as $ctrl">
+      <h2>TODO List</h2>
+      <p>A place to store the things you need to do</p>
+
+      <div class="inputs" ng-repeat="item in $ctrl.todos">
+        <p class="index">{{$index + 1}}.</p>
+        <button class="completeButton" ng-click="item.isComplete=true " ng-if="!item.isComplete">complete</button>
+        <p class="task" ng-class="{completed: item.isComplete}">{{ item.task }}</p>
+        <a href="" ng-click="$ctrl.delete($index);"><i class="fas fa-times"></i></a>
+      </div>
+
+      <form ng-submit="$ctrl.add($ctrl.newTodo);">
+        <input ng-model="$ctrl.newTodo.task" type="text" placeholder="Add your to do">
+        <button class="addButton" ng-disabled="!$ctrl.newTodo">Add</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://code.angularjs.org/1.6.5/angular.js"></script>
+  <!--Our module needs to be created before any pieces-->
+  <script src="app.module.js"></script>
+  <script src="app.controller.js"></script>
+</body>
+
+</html>
